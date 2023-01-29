@@ -7,3 +7,9 @@
   file:
     path: "{{ swap_file_path }}"
     state: absent
+
+- name: Disable swapoff permanently
+  replace:
+    path: /etc/fstab
+    regexp: '^(\s*)([^#\n]+\s+)(\w+\s+)swap(\s+.*)$'
+    replace: '# \1\2\3swap\4'
